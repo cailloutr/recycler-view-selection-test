@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RecyclerViewSelectionTest</string>
+    <string name="share">Share</string>
+    <string name="content_description_share">Share button</string>
+    <string name="delete">Delete</string>
+    <string name="content_description_delete">Delete Button</string>
+    <string name="content_description_more">More Button</string>
+    <string name="more">More</string>
+</resources>
