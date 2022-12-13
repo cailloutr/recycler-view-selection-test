@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter = Adapter(this) {
+        adapter = Adapter() {
             when (it.size) {
                 1 -> {
                     if (actionMode == null) {
@@ -48,12 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         val lista = mutableListOf<Item>()
 
-        for (i in 1..100) {
+        for (i in 0..100) {
             lista.add(Item("Teste $i"))
         }
 
         return lista
-
     }
 
     private val callback = object : ActionMode.Callback {

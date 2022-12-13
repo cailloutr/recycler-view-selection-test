@@ -1,13 +1,11 @@
 package com.example.recyclerviewselectiontest
 
-import android.content.Context
 import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.util.contains
-import androidx.core.util.forEach
 import androidx.core.util.remove
 import androidx.core.util.size
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.recyclerviewselectiontest.databinding.ListItemBinding
 
 class Adapter(
-    private val context: Context,
     private val actionListener: (itemStateArray: SparseBooleanArray) -> Unit
 ) : RecyclerView.Adapter<Adapter.ItemViewHolder>() {
 
@@ -85,9 +82,7 @@ class Adapter(
                 }
 
                 actionListener(itemStateArray)
-                Log.i(TAG, "onBindViewHolder: AdapterList: isSelectedMode: $isSelectedMode")
                 Log.i(TAG, "onBindViewHolder: itemStateArray: $itemStateArray")
-//                Log.i(TAG, "onBindViewHolder: List: $position - Adapter ${holder.adapterPosition}")
             }
         }
     }
@@ -106,9 +101,17 @@ class Adapter(
     }
 
     fun deleteSelectedItemns() {
-        itemStateArray.forEach { key, _ ->
-            lista.removeAt(key)
+        for (index in itemStateArray.size - 1 downTo 0) {
+            Log.i(TAG, "deleteSelectedItemns: $index")
+            Log.i(TAG, "deleteSelectedItemns: ${itemStateArray.keyAt(index)}")
+            Log.i(TAG, "deleteSelectedItemns: ${lista[itemStateArray.keyAt(index)].nome}")
+
+            val listIndex = itemStateArray.keyAt(index)
+            lista.removeAt(listIndex)
+            notifyItemRemoved(listIndex)
         }
-        resetStateArray()
+        itemStateArray.clear()
+        actionListener(itemStateArray)
+        isSelectedMode = false
     }
 }
